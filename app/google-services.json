@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1054578431294",
+    "firebase_url": "https://smipar-milochat-17102000-default-rtdb.firebaseio.com",
+    "project_id": "smipar-milochat-17102000",
+    "storage_bucket": "smipar-milochat-17102000.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054578431294:android:3d59829c56f5c2c664486f",
+        "android_client_info": {
+          "package_name": "com.av.avmessenger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHcC6QbcOWq8gtKulp1kVAvcd9Yb5WYGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054578431294:android:624ab449b0a97c5264486f",
+        "android_client_info": {
+          "package_name": "com.av.milochat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHcC6QbcOWq8gtKulp1kVAvcd9Yb5WYGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054578431294:android:5f6eb7dbb7d7a82664486f",
+        "android_client_info": {
+          "package_name": "com.example.afinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHcC6QbcOWq8gtKulp1kVAvcd9Yb5WYGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
