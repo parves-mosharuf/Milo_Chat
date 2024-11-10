@@ -19,21 +19,18 @@
         app:layout_constraintVertical_bias="0.381"
         app:srcCompat="@drawable/av" />
 
-    <TextView
+    <ImageView
         android:id="@+id/logonameimg"
-        android:layout_width="@dimen/_337sdp"
-        android:layout_height="@dimen/_103sdp"
-        android:fontFamily="@font/apptext"
-        android:gravity="center"
-        android:text="Chat"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_30sdp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="center_horizontal"
+        android:src="@drawable/chatt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.614" />
+        app:layout_constraintVertical_bias="0.593" />
 
     <TextView
         android:id="@+id/ownone"

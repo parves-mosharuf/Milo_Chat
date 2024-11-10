@@ -30,7 +30,7 @@
         android:layout_toRightOf="@id/pro"
         android:fontFamily="@font/poppins_regular"
         android:padding="@dimen/_7sdp"
-        android:text="Techcoder"
+        android:text="Reciver name"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
