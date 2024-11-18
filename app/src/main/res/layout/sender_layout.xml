@@ -15,7 +15,7 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:src="@drawable/photocamera" />
+        android:src="@drawable/boy" />
 
     <TextView
         android:id="@+id/msgsendertyp"

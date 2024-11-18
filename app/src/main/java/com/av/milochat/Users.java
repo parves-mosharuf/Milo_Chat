@@ -1,5 +1,4 @@
 package com.av.milochat;
-
 public class Users {
     String profilepic,mail,userName,password,userId,lastMessage,status;
 

@@ -34,7 +34,6 @@ public class login extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCancelable(false);
-        getSupportActionBar().hide();
         auth = FirebaseAuth.getInstance();
         button = findViewById(R.id.logbutton);
         email = findViewById(R.id.editTexLogEmail);

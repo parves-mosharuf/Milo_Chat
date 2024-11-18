@@ -1,5 +1,3 @@
-
-
 package com.av.milochat;
 
 import static com.av.milochat.chatwindo.reciverIImg;
@@ -22,7 +20,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
 public class messagesAdpter extends RecyclerView.Adapter {
     Context context;
     ArrayList<msgModelclass> messagesAdpterArrayList;
