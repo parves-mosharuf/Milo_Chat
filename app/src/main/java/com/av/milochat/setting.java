@@ -200,6 +200,7 @@ public class setting extends AppCompatActivity {
     FirebaseStorage storage;
     Uri setImageUri;
     String email,password;
+    ImageView settingprofile;
     ProgressDialog progressDialog;
 
 
@@ -216,9 +217,10 @@ public class setting extends AppCompatActivity {
         setname = findViewById(R.id.settingname);
         setstatus = findViewById(R.id.settingstatus);
         donebut = findViewById(R.id.donebutt);
+        settingprofile = findViewById(R.id.settingprofile);
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Saing...");
+        progressDialog.setMessage("Saveing...");
         progressDialog.setCancelable(false);
 
         DatabaseReference reference = database.getReference().child("user").child(auth.getUid());
@@ -278,7 +280,7 @@ public class setting extends AppCompatActivity {
                                                 finish();
                                             }else {
                                                 progressDialog.dismiss();
-                                                Toast.makeText(setting.this, "Some thing went romg", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(setting.this, "Some thing went wrong", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
@@ -297,13 +299,13 @@ public class setting extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         progressDialog.dismiss();
-                                        Toast.makeText(setting.this, "Data Is save ", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(setting.this, "Data Is Save ", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(setting.this,MainActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }else {
                                         progressDialog.dismiss();
-                                        Toast.makeText(setting.this, "Some thing went romg", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(setting.this, "Some thing went wrong", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

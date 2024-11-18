@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 public class splash extends AppCompatActivity {
     ImageView logo;
-    TextView name, own1, own2;
+    TextView  own1, own2;
+    ImageView name;
     Animation topAnim, bottomAnim;
 
 
@@ -44,6 +45,6 @@ public class splash extends AppCompatActivity {
               startActivity(intent);
               finish();
           }
-      },4000);
+      },2000);
     }
 }
