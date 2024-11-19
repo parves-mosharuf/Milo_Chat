@@ -34,10 +34,9 @@ public class setting extends AppCompatActivity {
     Button donebut;
     FirebaseAuth auth;
     FirebaseDatabase database;
-
+    FirebaseStorage storage;
     Uri setImageUri;
     String email,password;
-    ImageView settingprofile;
     ProgressDialog progressDialog;
 
 
@@ -49,19 +48,18 @@ public class setting extends AppCompatActivity {
         getSupportActionBar().hide();
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-
+        storage = FirebaseStorage.getInstance();
         setprofile = findViewById(R.id.settingprofile);
         setname = findViewById(R.id.settingname);
         setstatus = findViewById(R.id.settingstatus);
         donebut = findViewById(R.id.donebutt);
-        settingprofile = findViewById(R.id.settingprofile);
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Saveing...");
+        progressDialog.setMessage("Saing...");
         progressDialog.setCancelable(false);
 
         DatabaseReference reference = database.getReference().child("user").child(auth.getUid());
-
+        StorageReference storageReference = storage.getReference().child("upload").child(auth.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -98,7 +96,56 @@ public class setting extends AppCompatActivity {
                 String name = setname.getText().toString();
                 String Status = setstatus.getText().toString();
                 if (setImageUri!=null){
-
+                    storageReference.putFile(setImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String finalImageUri = uri.toString();
+                                    Users users = new Users(auth.getUid(), name,email,password,finalImageUri,Status);
+                                    reference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+                                                progressDialog.dismiss();
+                                                Toast.makeText(setting.this, "Data Is save ", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(setting.this,MainActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }else {
+                                                progressDialog.dismiss();
+                                                Toast.makeText(setting.this, "Some thing went romg", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }else {
+                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String finalImageUri = uri.toString();
+                            Users users = new Users(auth.getUid(), name,email,password,finalImageUri,Status);
+                            reference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        progressDialog.dismiss();
+                                        Toast.makeText(setting.this, "Data Is save ", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(setting.this,MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }else {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(setting.this, "Some thing went romg", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+                    });
                 }
 
             }

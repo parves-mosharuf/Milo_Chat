@@ -57,12 +57,12 @@ public class MainActivity extends AppCompatActivity{
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-               for (DataSnapshot dataSnapshot: snapshot.getChildren())
-               {
-                   Users users = dataSnapshot.getValue(Users.class);
-                   usersArrayList.add(users);
-               }
-               adapter.notifyDataSetChanged();
+                for (DataSnapshot dataSnapshot: snapshot.getChildren())
+                {
+                    Users users = dataSnapshot.getValue(Users.class);
+                    usersArrayList.add(users);
+                }
+                adapter.notifyDataSetChanged();
             }
 
             @Override

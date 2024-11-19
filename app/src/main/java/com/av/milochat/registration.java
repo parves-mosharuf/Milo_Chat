@@ -39,7 +39,7 @@ public class registration extends AppCompatActivity {
     String imageuri;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     FirebaseDatabase database;
-
+    FirebaseStorage storage;
     ProgressDialog progressDialog;
 
     @Override
@@ -51,7 +51,7 @@ public class registration extends AppCompatActivity {
         progressDialog.setCancelable(false);
         getSupportActionBar().hide();
         database = FirebaseDatabase.getInstance();
-
+        storage = FirebaseStorage.getInstance();
         auth = FirebaseAuth.getInstance();
         loginbut = findViewById(R.id.loginbut);
         rg_username = findViewById(R.id.rgusername);
@@ -97,15 +97,60 @@ public class registration extends AppCompatActivity {
                     auth.createUserWithEmailAndPassword(emaill,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                             if (task.isSuccessful()){
-                                 String id = task.getResult().getUser().getUid();
-                                 DatabaseReference reference = database.getReference().child("user").child(id);
+                            if (task.isSuccessful()){
+                                String id = task.getResult().getUser().getUid();
+                                DatabaseReference reference = database.getReference().child("user").child(id);
+                                StorageReference storageReference = storage.getReference().child("Upload").child(id);
 
-
-
-                             }else {
-                                 Toast.makeText(registration.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                             }
+                                if (imageURI!=null){
+                                    storageReference.putFile(imageURI).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                            if (task.isSuccessful()){
+                                                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                    @Override
+                                                    public void onSuccess(Uri uri) {
+                                                        imageuri = uri.toString();
+                                                        Users users = new Users(id,namee,emaill,Password,imageuri,status);
+                                                        reference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if (task.isSuccessful()){
+                                                                    progressDialog.show();
+                                                                    Intent intent = new Intent(registration.this,MainActivity.class);
+                                                                    startActivity(intent);
+                                                                    finish();
+                                                                }else {
+                                                                    Toast.makeText(registration.this, "Error in creating the user", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    });
+                                }else {
+                                    String status = "Hey I'm Using This Application";
+                                    imageuri = "https://firebasestorage.googleapis.com/v0/b/av-messenger-dc8f3.appspot.com/o/man.png?alt=media&token=880f431d-9344-45e7-afe4-c2cafe8a5257";
+                                    Users users = new Users(id,namee,emaill,Password,imageuri,status);
+                                    reference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+                                                progressDialog.show();
+                                                Intent intent = new Intent(registration.this,MainActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }else {
+                                                Toast.makeText(registration.this, "Error in creating the user", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                }
+                            }else {
+                                Toast.makeText(registration.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                 }
@@ -117,10 +162,10 @@ public class registration extends AppCompatActivity {
         rg_profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent();
-               intent.setType("image/*");
-               intent.setAction(Intent.ACTION_GET_CONTENT);
-               startActivityForResult(Intent.createChooser(intent,"Select Picture"),10);
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent,"Select Picture"),10);
             }
         });
     }
