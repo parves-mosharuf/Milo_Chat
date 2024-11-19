@@ -11,7 +11,7 @@
         android:id="@+id/profilerg0"
         android:layout_width="151dp"
         android:layout_height="130dp"
-        android:src="@drawable/photocamera"
+        android:src="@drawable/boy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
